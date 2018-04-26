@@ -30,19 +30,35 @@ function showUsers(user) {
     text.textContent += JSON.stringify(user.firstName) + " " + JSON.stringify(user.lastName);
 }
 
-submit.addEventListener("click", () => {
-    addUser(makeUser());
-});
-
 function removeUserB() {
-    result.children[0].remove();
+    result.firstChild.remove();
     users.shift();
 }
 
 function removeUserE() {
+    result.lastChild.remove();
     users.pop();
 }
 
 function removeUsers() {
+    while (result.hasChildNodes()) {
+        result.removeChild(result.lastChild);
+    }
     users.length = 0;
 }
+
+submit.addEventListener("click", () => {
+    addUser(makeUser());
+});
+
+buttonRemoveB.addEventListener("click", () => {
+    removeUserB();
+});
+
+buttonRemoveE.addEventListener("click", () => {
+    removeUserE();
+});
+
+buttonRemoveA.addEventListener("click", () => {
+    removeUsers();
+});
