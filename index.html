@@ -5,10 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Cokolwiek</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/reset.css">
 </head>
 <body>
-  <p>Cokolwiek</p>  
-  <p>Break free!</p>
-  <p>wee</p>
+  <main class="main">
+    <form class="form">
+      <input class="form__text" id="firstName" type="text" placeholder="First name">
+      <input class="form__text" id="lastName" type="text" placeholder="Last name">
+      <input class="form__submit" id="submit" type="submit" value="Add user">
+    </form>
+    <section class="result">
+      <div class="result__container" id="result"></div>
+      <div class="options">
+          <button class="options__button" id="buttonRemoveB">Remove user (beginning)</button>
+          <button class="options__button" id="buttonRemoveE">Remove user (end)</button>
+          <button class="options__button" id="buttonRemoveA">Remove all users</button>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

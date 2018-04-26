@@ -1,0 +1,89 @@
+//Imports    
+@import url('https://fonts.googleapis.com/css?family=Roboto:700')
+
+//Variables
+$light: #E0E0E0
+$success: #00C853
+$danger: #EF5350
+
+//Base CSS
+*
+    font-family: "Roboto", sans-serif
+    font-size: 14px
+    transition: 300ms ease-in-out
+    
+input, button
+    border: 0
+    border-radius: 5px
+    padding: 0 25px
+    outline: none
+    height: 50px
+    letter-spacing: 0.05em
+
+//Main CSS
+.main
+    display: grid
+    grid-template: minmax(50px, auto) 1fr / 1fr minmax(170px, 1200px) 1fr
+    min-height: 100vh
+    width: 100%
+
+.form
+    display: grid
+    grid-column: 2 / 3
+    grid-gap: 50px
+    grid-template: minmax(50px, 1fr) / repeat(auto-fit, minmax(170px, 1fr))
+    align-items: center
+    margin: 50px
+    max-width: 1200px
+
+.form__text
+    background: $light
+
+    &:hover
+        background: darken($light, 5%)
+
+.form__submit
+    background: $success
+    color: #ffffff
+    cursor: pointer
+    text-transform: uppercase
+
+    &:active
+        transform: scale(1.025)
+
+    &:hover
+        background: darken($success, 5%)
+
+.result
+    display: grid
+    grid-gap: 50px
+    grid-column: 2 / 3
+    grid-row: 2 / 3
+    grid-template-rows: minmax(50px, 1fr) auto
+    margin: 0 50px 50px 50px
+    max-width: 1200px
+
+.result__container
+    grid-row: 1 / 2
+    border-radius: 5px
+    padding: 50px
+    background: $light
+
+.options
+    display: grid
+    grid-gap: 50px
+    grid-row: 2 / 3
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr))
+
+.options__button
+    height: 50px
+    background: $danger
+    color: #ffffff
+    cursor: pointer
+    text-transform: uppercase
+    
+    &:active
+        transform: scale(1.025)
+
+    &:hover
+        background: darken($danger, 5%)

@@ -1,1 +1,96 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css?family=Roboto:700");
+* {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  transition: 300ms ease-in-out;
+}
+
+input, button {
+  border: 0;
+  border-radius: 5px;
+  padding: 0 25px;
+  outline: none;
+  height: 50px;
+  letter-spacing: 0.05em;
+}
+
+.main {
+  display: grid;
+  grid-template: minmax(50px, auto) 1fr/1fr minmax(170px, 1200px) 1fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.form {
+  display: grid;
+  grid-column: 2 / 3;
+  grid-gap: 50px;
+  grid-template: minmax(50px, 1fr)/repeat(auto-fit, minmax(170px, 1fr));
+  align-items: center;
+  margin: 50px;
+  max-width: 1200px;
+}
+
+.form__text {
+  background: #E0E0E0;
+}
+
+.form__text:hover {
+  background: lightgray;
+}
+
+.form__submit {
+  background: #00C853;
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.form__submit:active {
+  transform: scale(1.025);
+}
+
+.form__submit:hover {
+  background: #00af48;
+}
+
+.result {
+  display: grid;
+  grid-gap: 50px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  grid-template-rows: minmax(50px, 1fr) auto;
+  margin: 0 50px 50px 50px;
+  max-width: 1200px;
+}
+
+.result__container {
+  grid-row: 1 / 2;
+  border-radius: 5px;
+  padding: 50px;
+  background: #E0E0E0;
+}
+
+.options {
+  display: grid;
+  grid-gap: 50px;
+  grid-row: 2 / 3;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.options__button {
+  height: 50px;
+  background: #EF5350;
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.options__button:active {
+  transform: scale(1.025);
+}
+
+.options__button:hover {
+  background: #ed3c39;
+}
+/*# sourceMappingURL=style.css.map */
