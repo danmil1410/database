@@ -11,7 +11,7 @@ let config = {
 firebase.initializeApp(config);
 let firestore = firebase.firestore();
 
-const docRef = firestore.doc("samples/userData");
+const docRef = firestore.doc("database/user");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
@@ -27,9 +27,12 @@ submit.addEventListener("click", () => {
         .then(() => {
             console.log("Data saved!");
         })
-        .catch(error => {
-            console.log("Error: ", error);
-        });
+        .catch(
+            error => {
+                console.log("Error: ", error);
+            },
+            { merge: true }
+        );
 });
 
 submit.addEventListener("click", () => {
@@ -40,7 +43,7 @@ submit.addEventListener("click", () => {
                 const userData = doc.data();
                 const text = document.createElement("p");
                 result.appendChild(text);
-                text.textContent = userData;
+                text.textContent = JSON.stringify(userData);
             }
         })
         .catch(error => {
