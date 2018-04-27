@@ -24,14 +24,26 @@ submit.addEventListener("click", () => {
         .set({
             user: userName
         })
+        .then(() => {
+            console.log("Data saved!");
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+        });
+});
+
+submit.addEventListener("click", () => {
+    docRef
         .get()
         .then(doc => {
-            const userName = [firstName.value, lastName.value];
             if (doc && doc.exists) {
                 const userData = doc.data();
                 const text = document.createElement("p");
                 result.appendChild(text);
-                text.textContent += userData;
+                text.textContent = userData;
             }
+        })
+        .catch(error => {
+            console.log("Error: ", error);
         });
 });
