@@ -48,7 +48,15 @@ function removeUsers() {
 }
 
 submit.addEventListener("click", () => {
-    addUser(makeUser());
+    try {
+        if (firstName.value && lastName.value) {
+            addUser(makeUser());
+        } else {
+            throw new SyntaxError("Incomplete data. Type the full name!");
+        }
+    } catch(e) {
+        alert ("Input Error: " + e.message);
+    }
 });
 
 buttonRemoveB.addEventListener("click", () => {
