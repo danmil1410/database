@@ -36,13 +36,15 @@ addUser.addEventListener("click", () => {
 showUsers.addEventListener("click", () => {
     docRef
         .get()
-        .then(doc => {
-            if (doc && doc.exists) {
-                const userData = doc.data();
-                const text = document.createElement("p");
-                result.appendChild(text);
-                text.textContent = JSON.stringify(userData);
-            }
+        .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                if (doc && doc.exists) {
+                    const userData = doc.data();
+                    const text = document.createElement("p");
+                    result.appendChild(text);
+                    text.textContent = JSON.stringify(userData);
+                }
+            });
         })
         .catch(error => {
             console.log("Error: ", error);
