@@ -9,7 +9,7 @@ let config = {
 };
 
 firebase.initializeApp(config);
-let firestore = firestore.firestore();
+let firestore = firebase.firestore();
 
 const docRef = firestore.doc("samples/userData");
 const firstName = document.querySelector("#firstName");
