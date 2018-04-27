@@ -18,7 +18,8 @@ const submit = document.querySelector("#submit");
 const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
-    const userName = [firstName, lastName];
+    const userName = [firstName.value, lastName.value];
+    console.log("Save user: " + userName);
     docRef
         .set(
             {
