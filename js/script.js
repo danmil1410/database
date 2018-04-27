@@ -52,7 +52,7 @@ submit.addEventListener("click", () => {
         if (firstName.value && lastName.value) {
             addUser(makeUser());
         } else {
-            throw new SyntaxError("Incomplete data. Type the full name!");
+            throw new TypeError("Incomplete data. Type the full name!");
         }
     } catch(e) {
         alert ("Input Error: " + e.message);
@@ -60,13 +60,37 @@ submit.addEventListener("click", () => {
 });
 
 buttonRemoveB.addEventListener("click", () => {
-    removeUserB();
+    try {
+        if (users.length) {
+            removeUserB();
+        } else {
+            throw new TypeError("There are no users to delete!");
+        }
+    } catch(e) {
+        alert ("Array Error: " + e.message);
+    }
 });
 
 buttonRemoveE.addEventListener("click", () => {
-    removeUserE();
+    try {
+        if (users.length) {
+            removeUserE();
+        } else {
+            throw new TypeError("There are no users to delete!");
+        }
+    } catch(e) {
+        alert ("Array Error: " + e.message);
+    }
 });
 
 buttonRemoveA.addEventListener("click", () => {
-    removeUsers();
+    try {
+        if (users.length) {
+            removeUserA();
+        } else {
+            throw new TypeError("There are no users to delete!");
+        }
+    } catch(e) {
+        alert ("Array Error: " + e.message);
+    }
 });
