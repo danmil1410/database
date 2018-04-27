@@ -15,6 +15,7 @@ const docRef = firestore.doc("samples/userData");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
+const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
     const userName = [firstName.value, lastName.value];
@@ -30,7 +31,7 @@ submit.addEventListener("click", () => {
                 const userData = doc.data();
                 const text = document.createElement("p");
                 result.appendChild(text);
-                text.textContent = userData;
+                text.textContent += userData;
             }
         });
 });
