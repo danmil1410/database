@@ -61,7 +61,7 @@ submit.addEventListener("click", () => {
 
 buttonRemoveB.addEventListener("click", () => {
     try {
-        if (users.length) {
+        if (users.length > 0) {
             removeUserB();
         } else {
             throw new TypeError("There are no users to delete!");
@@ -73,7 +73,7 @@ buttonRemoveB.addEventListener("click", () => {
 
 buttonRemoveE.addEventListener("click", () => {
     try {
-        if (users.length) {
+        if (users.length > 0) {
             removeUserE();
         } else {
             throw new TypeError("There are no users to delete!");
@@ -85,7 +85,7 @@ buttonRemoveE.addEventListener("click", () => {
 
 buttonRemoveA.addEventListener("click", () => {
     try {
-        if (users.length) {
+        if (users.length > 0) {
             removeUserA();
         } else {
             throw new TypeError("There are no users to delete!");
