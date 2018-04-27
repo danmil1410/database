@@ -1,3 +1,5 @@
+"use strict";
+
 let config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -8,8 +10,8 @@ let config = {
 };
 
 firebase.initializeApp(config);
-let firestore = firebase.firestore();
 
+let firestore = firebase.firestore();
 const docRef = firestore.collection("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -17,22 +19,11 @@ const submit = document.querySelector("#submit");
 const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
-    var newUserRef = docRef.doc();
-    newUserRef
-        .set({
+    docRef
+        .add({
             firstName: firstName.value,
             lastName: lastName.value
         })
-        .then(() => {
-            console.log("Data saved!");
-        })
-        .catch(error => {
-            console.log("Error: ", error);
-        });
-});
-
-submit.addEventListener("click", () => {
-    newUserRef
         .get()
         .then(doc => {
             if (doc && doc.exists) {
