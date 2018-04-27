@@ -1,4 +1,5 @@
 "use strict";
+
 let config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -14,10 +15,11 @@ let firestore = firebase.firestore();
 const docRef = firestore.collection("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
-const submit = document.querySelector("#submit");
+const addUser = document.querySelector("#addUser");
+const showUsers = document.querySelector("#showUsers");
 const result = document.querySelector("#result");
 
-submit.addEventListener("click", () => {
+addUser.addEventListener("click", () => {
     docRef
         .add({
             firstName: firstName.value,
@@ -29,6 +31,9 @@ submit.addEventListener("click", () => {
         .catch(error => {
             console.log("Error: ", error);
         });
+});
+
+showUsers.addEventListener("click", () => {
     docRef
         .get()
         .then(doc => {
