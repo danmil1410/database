@@ -21,7 +21,9 @@ submit.addEventListener("click", () => {
     const userName = [firstName.value, lastName.value];
     console.log("Save user: " + userName);
     docRef
-        .set({ user: userName }, { merge: true })
+        .create({
+            user: userName
+        })
         .then(() => {
             console.log("Data saved!");
         })
