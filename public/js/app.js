@@ -1,5 +1,4 @@
 "use strict";
-
 let config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -10,7 +9,7 @@ let config = {
 };
 
 firebase.initializeApp(config);
-const firestore = firebase.firestore();
+let firestore = firestore.firestore();
 
 const docRef = firestore.doc("samples/userData");
 const firstName = document.querySelector("#firstName");
@@ -24,10 +23,14 @@ submit.addEventListener("click", () => {
         .set({
             user: userName
         })
-        .then(() => {
-            console.log("Data saved!");
-        })
-        .catch(error => {
-            console.log("Error: ", error);
+        .get()
+        .then(doc => {
+            const userName = [firstName.value, lastName.value];
+            if (doc && doc.exists) {
+                const userData = doc.data();
+                const text = document.createElement("p");
+                result.appendChild(text);
+                text.textContent = userData;
+            }
         });
 });
