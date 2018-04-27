@@ -1,5 +1,4 @@
 "use strict";
-
 let config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -10,8 +9,8 @@ let config = {
 };
 
 firebase.initializeApp(config);
-
 let firestore = firebase.firestore();
+
 const docRef = firestore.collection("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -24,6 +23,13 @@ submit.addEventListener("click", () => {
             firstName: firstName.value,
             lastName: lastName.value
         })
+        .then(() => {
+            console.log("Data saved!");
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+        });
+    docRef
         .get()
         .then(doc => {
             if (doc && doc.exists) {
