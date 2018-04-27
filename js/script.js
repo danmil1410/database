@@ -9,9 +9,11 @@ const buttonRemoveE = document.getElementById("buttonRemoveE");
 const buttonRemoveA = document.getElementById("buttonRemoveA");
 const users = [];
 
-function User (firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+class User {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
 
 function makeUser() {
@@ -27,7 +29,7 @@ function addUser(user) {
 function showUsers(user) {
     const text = document.createElement("p");
     result.appendChild(text);
-    text.textContent += JSON.stringify(user.firstName) + " " + JSON.stringify(user.lastName);
+    text.textContent += JSON.stringify(user.firstName).replace(/["']/g, "") + " " + JSON.stringify(user.lastName).replace(/["']/g, "");
 }
 
 function removeUserB() {
@@ -47,6 +49,14 @@ function removeUsers() {
     users.length = 0;
 }
 
+function throwExc() {
+    throw new TypeError("There are no users to delete!");
+}
+
+function catchExc(e) {
+    alert (e.name+ ": " + e.message);
+}
+
 submit.addEventListener("click", () => {
     try {
         if (firstName.value && lastName.value) {
@@ -55,7 +65,7 @@ submit.addEventListener("click", () => {
             throw new TypeError("Incomplete data. Type the full name!");
         }
     } catch(e) {
-        alert ("Input Error: " + e.message);
+        catchExc(e);
     }
 });
 
@@ -64,10 +74,10 @@ buttonRemoveB.addEventListener("click", () => {
         if (users.length) {
             removeUserB();
         } else {
-            throw new TypeError("There are no users to delete!");
+            throwExc();
         }
     } catch(e) {
-        alert ("Array Error: " + e.message);
+        catchExc(e);
     }
 });
 
@@ -76,21 +86,21 @@ buttonRemoveE.addEventListener("click", () => {
         if (users.length) {
             removeUserE();
         } else {
-            throw new TypeError("There are no users to delete!");
+            throwExc();
         }
     } catch(e) {
-        alert ("Array Error: " + e.message);
+        catchExc(e);
     }
 });
 
 buttonRemoveA.addEventListener("click", () => {
     try {
         if (users.length) {
-            removeUserA();
+            removeUsers();
         } else {
-            throw new TypeError("There are no users to delete!");
+            throwExc();
         }
     } catch(e) {
-        alert ("Array Error: " + e.message);
+        catchExc(e);
     }
 });
