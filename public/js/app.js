@@ -18,8 +18,7 @@ const submit = document.querySelector("#submit");
 const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
-    let newUser = docRef.doc();
-    newUser
+    docRef
         .add({
             firstName: firstName.value,
             lastName: lastName.value
@@ -33,7 +32,7 @@ submit.addEventListener("click", () => {
 });
 
 submit.addEventListener("click", () => {
-    newUser
+    docRef
         .get()
         .then(doc => {
             if (doc && doc.exists) {
