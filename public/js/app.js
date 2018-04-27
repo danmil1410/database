@@ -21,18 +21,13 @@ submit.addEventListener("click", () => {
     const userName = [firstName.value, lastName.value];
     console.log("Save user: " + userName);
     docRef
-        .set({
-            user: userName
-        })
+        .set({ user: userName }, { merge: true })
         .then(() => {
             console.log("Data saved!");
         })
-        .catch(
-            error => {
-                console.log("Error: ", error);
-            },
-            { merge: true }
-        );
+        .catch(error => {
+            console.log("Error: ", error);
+        });
 });
 
 submit.addEventListener("click", () => {
