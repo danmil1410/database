@@ -17,14 +17,16 @@ const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
 
 submit.addEventListener("click", () => {
-    const userFirstName = firstName.value;
-    const userLastName = lastName.value;
-    console.log("Save user: " + userFirstName + " " + userLastName);
-    docRef.set({
-        userName: userFirstName + userLastName;
-    }).then(() => {
-        console.log("Data saved!");
-    }).catch((error) => {
-        console.log("Error: ", error);
-    });
+    const userName = [firstName.value, lastName.value];
+    console.log("Save user: " + userName);
+    docRef
+        .set({
+            user: userName
+        })
+        .then(() => {
+            console.log("Data saved!");
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+        });
 });
