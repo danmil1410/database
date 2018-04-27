@@ -1,4 +1,3 @@
-"use strict";
 let config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -17,37 +16,33 @@ const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
 const result = document.querySelector("#result");
 
-function eventListener() {
-    let newUserRef = docRef.doc();
-    submit.addEventListener("click", () => {
-        newUserRef
-            .set({
-                firstName: firstName.value,
-                lastName: lastName.value
-            })
-            .then(() => {
-                console.log("Data saved!");
-            })
-            .catch(error => {
-                console.log("Error: ", error);
-            });
-    });
+submit.addEventListener("click", () => {
+    var newUserRef = docRef.doc();
+    newUserRef
+        .set({
+            firstName: firstName.value,
+            lastName: lastName.value
+        })
+        .then(() => {
+            console.log("Data saved!");
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+        });
+});
 
-    submit.addEventListener("click", () => {
-        newUserRef
-            .get()
-            .then(doc => {
-                if (doc && doc.exists) {
-                    const userData = doc.data();
-                    const text = document.createElement("p");
-                    result.appendChild(text);
-                    text.textContent = JSON.stringify(userData);
-                }
-            })
-            .catch(error => {
-                console.log("Error: ", error);
-            });
-    });
-}
-
-eventListener();
+submit.addEventListener("click", () => {
+    newUserRef
+        .get()
+        .then(doc => {
+            if (doc && doc.exists) {
+                const userData = doc.data();
+                const text = document.createElement("p");
+                result.appendChild(text);
+                text.textContent = JSON.stringify(userData);
+            }
+        })
+        .catch(error => {
+            console.log("Error: ", error);
+        });
+});
