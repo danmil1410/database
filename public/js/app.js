@@ -19,13 +19,15 @@ const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
     const userName = [firstName, lastName];
-    console.log("Save user: " + userName);
     docRef
-        .add({
-            user: userName
-        })
+        .set(
+            {
+                user: userName
+            },
+            { merge: true }
+        )
         .then(() => {
-            console.log("Data saved with id: ", docRef.id);
+            console.log("Data saved!");
         })
         .catch(error => {
             console.log("Error: ", error);
