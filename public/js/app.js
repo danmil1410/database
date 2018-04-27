@@ -11,7 +11,7 @@ let config = {
 firebase.initializeApp(config);
 let firestore = firebase.firestore();
 
-const docRef = firestore.doc("database");
+const docRef = db.collection("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
@@ -25,7 +25,7 @@ submit.addEventListener("click", () => {
             user: userName
         })
         .then(() => {
-            console.log("Data saved!");
+            console.log("Data saved with id: ", docRef.id);
         })
         .catch(error => {
             console.log("Error: ", error);
