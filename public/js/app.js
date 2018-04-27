@@ -11,7 +11,7 @@ let config = {
 firebase.initializeApp(config);
 let firestore = firebase.firestore();
 
-const docRef = firestore.doc("database/user");
+const docRef = firestore.doc("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const submit = document.querySelector("#submit");
@@ -21,12 +21,9 @@ submit.addEventListener("click", () => {
     const userName = [firstName.value, lastName.value];
     console.log("Save user: " + userName);
     docRef
-        .set(
-            {
-                user: userName
-            },
-            { merge: true }
-        )
+        .add({
+            user: userName
+        })
         .then(() => {
             console.log("Data saved!");
         })
