@@ -18,14 +18,14 @@ const submit = document.querySelector("#submit");
 const result = document.querySelector("#result");
 
 submit.addEventListener("click", () => {
-    const userName = [firstName.value, lastName.value];
+    const userName = { firstName: firstName.value, lastName: lastName.value };
     console.log("Save user: " + userName);
     docRef
-        .create({
+        .add({
             user: userName
         })
         .then(() => {
-            console.log("Data saved!");
+            console.log("Data saved with id: ", docRef.id);
         })
         .catch(error => {
             console.log("Error: ", error);
