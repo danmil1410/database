@@ -46,8 +46,7 @@ addUser.addEventListener("click", () => {
 
 showUsers.addEventListener("click", () => {
     docRef
-        .get()
-        .then(querySnapshot => {
+        .onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
                 if (doc && doc.exists) {
                     const userData = doc.data();
