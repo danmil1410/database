@@ -48,13 +48,18 @@ showUsers.addEventListener("click", () => {
     docRef
         .onSnapshot(snapshot => {
             snapshot.docChanges.forEach(change => {
-                const userData = doc.data();
-                const text = document.createElement("p");
-                result.appendChild(text);
-                text.textContent =
-                    JSON.stringify(userData.firstName).replace(/["']/g, "") +
-                    " " +
-                    JSON.stringify(userData.lastName).replace(/["']/g, "");
+                if (doc && doc.exists) {
+                    const userData = doc.data();
+                    const text = document.createElement("p");
+                    result.appendChild(text);
+                    text.textContent =
+                        JSON.stringify(userData.firstName).replace(
+                            /["']/g,
+                            ""
+                        ) +
+                        " " +
+                        JSON.stringify(userData.lastName).replace(/["']/g, "");
+                }
             });
         })
         .catch(error => {
