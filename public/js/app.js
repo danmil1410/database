@@ -29,7 +29,7 @@ addUser.addEventListener("click", () => {
             console.log("Data saved!");
         })
         .catch(error => {
-            console.log("Error: ", error);
+            console.log("Errors: ", error);
         });
 });
 
