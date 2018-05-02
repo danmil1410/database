@@ -49,9 +49,6 @@ showUsers.addEventListener("click", () => {
         .onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
                 if (doc && doc.exists) {
-                    while (result.firstChild) {
-                        result.removeChild(result.firstChild);
-                    }
                     const userData = doc.data();
                     const text = document.createElement("p");
                     result.appendChild(text);
