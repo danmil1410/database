@@ -51,6 +51,9 @@ showUsers.addEventListener("click", () => {
                 if (doc && doc.exists) {
                     const userData = doc.data();
                     const text = document.createElement("p");
+                    while (result.firstChild) {
+                        result.removeChild(result.firstChild);
+                    }
                     result.appendChild(text);
                     text.textContent =
                         JSON.stringify(userData.firstName).replace(
