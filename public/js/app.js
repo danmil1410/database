@@ -43,9 +43,12 @@ showUsers.addEventListener("click", () => {
                     const text = document.createElement("p");
                     result.appendChild(text);
                     text.textContent +=
-                        JSON.stringify(user.firstName).replace(/["']/g, "") +
+                        JSON.stringify(userData.firstName).replace(
+                            /["']/g,
+                            ""
+                        ) +
                         " " +
-                        JSON.stringify(user.lastName).replace(/["']/g, "");
+                        JSON.stringify(userData.lastName).replace(/["']/g, "");
                 }
             });
         })
