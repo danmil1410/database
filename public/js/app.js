@@ -11,7 +11,6 @@ const config = {
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
-
 const docRef = firestore.collection("database");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -25,6 +24,7 @@ addUser.addEventListener("click", () => {
             firstName: firstName.value,
             lastName: lastName.value
         })
+        .orderBy("firstName")
         .then(() => {
             console.log("Data saved!");
         })
@@ -36,7 +36,6 @@ addUser.addEventListener("click", () => {
 showUsers.addEventListener("click", () => {
     docRef
         .get()
-        .orderBy("firstName")
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 if (doc && doc.exists) {
