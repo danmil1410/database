@@ -42,7 +42,10 @@ showUsers.addEventListener("click", () => {
                     const userData = doc.data();
                     const text = document.createElement("p");
                     result.appendChild(text);
-                    text.textContent = JSON.stringify(userData);
+                    text.textContent +=
+                        JSON.stringify(user.firstName).replace(/["']/g, "") +
+                        " " +
+                        JSON.stringify(user.lastName).replace(/["']/g, "");
                 }
             });
         })
