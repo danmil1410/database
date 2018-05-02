@@ -10,8 +10,10 @@ const config = {
 };
 
 firebase.initializeApp(config);
+
 const firestore = firebase.firestore();
 const docRef = firestore.collection("database");
+const userForm = document.querySelector("#userForm");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const addUser = document.querySelector("#addUser");
@@ -24,13 +26,13 @@ addUser.addEventListener("click", () => {
             firstName: firstName.value,
             lastName: lastName.value
         })
-        .orderBy("firstName")
         .then(() => {
             console.log("Data saved!");
         })
         .catch(error => {
             console.log("Error: ", error);
         });
+    userForm.reset();
 });
 
 showUsers.addEventListener("click", () => {
