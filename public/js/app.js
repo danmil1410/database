@@ -16,9 +16,12 @@ const docRef = firestore.collection("database");
 const userForm = document.querySelector("#userForm");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
+const firstNameDelete = document.querySelector("#firstNameDelete");
+const lastNameDelete = document.querySelector("#lastNameDelete");
 const addUser = document.querySelector("#addUser");
 const showUsers = document.querySelector("#showUsers");
 const result = document.querySelector("#result");
+const buttonRemove = document.querySelector("#buttonRemove");
 
 addUser.addEventListener("click", () => {
     try {
@@ -45,13 +48,13 @@ addUser.addEventListener("click", () => {
 });
 
 showUsers.addEventListener("click", () => {
-    docRef
-        .onSnapshot(querySnapshot => {
-            while (result.firstChild) {
-                result.removeChild(result.firstChild);
-            }
-            querySnapshot.forEach(doc => {
-                if (doc && doc.exists) {
+    try {
+        if (doc && doc.exists) {
+            docRef.onSnapshot(querySnapshot => {
+                while (result.firstChild) {
+                    result.removeChild(result.firstChild);
+                }
+                querySnapshot.forEach(doc => {
                     const userData = doc.data();
                     const text = document.createElement("p");
                     result.appendChild(text);
@@ -62,10 +65,29 @@ showUsers.addEventListener("click", () => {
                         ) +
                         " " +
                         JSON.stringify(userData.lastName).replace(/["']/g, "");
-                }
+                });
             });
-        })
-        .catch(error => {
-            console.log("Error: ", error);
-        });
+        } else {
+            throw new TypeError("There are no users to delete!");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+});
+
+buttonRemove.addEventListener("click", () => {
+    try {
+        if (doc && doc.exists) {
+            docRef.onSnapshot(querySnapshot => {
+                const userDelete = docRef
+                    .where("firstName", "==", firstNameDelete.value)
+                    .where("lastName", "==", lastNameDelete.value);
+                userDelete.delete();
+            });
+        } else {
+            throw new TypeError("There are no users to delete!");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
 });

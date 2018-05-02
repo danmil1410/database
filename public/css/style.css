@@ -167,11 +167,13 @@ button {
     max-width: 1200px;
 }
 
-.form__text {
+.form__text,
+.options__text {
     background: #e0e0e0;
 }
 
-.form__text:hover {
+.form__text:hover,
+.options__text:hover {
     background: lightgray;
 }
 
