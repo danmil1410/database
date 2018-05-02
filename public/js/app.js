@@ -32,7 +32,8 @@ addUser.addEventListener("click", () => {
         .catch(error => {
             console.log("Error: ", error);
         });
-    userForm.reset();
+    firstName = "";
+    lastName = "";
 });
 
 showUsers.addEventListener("click", () => {
