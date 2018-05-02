@@ -69,6 +69,13 @@ buttonRemove.addEventListener("click", () => {
         const userDelete = docRef
             .where("firstName", "==", firstNameDelete.value)
             .where("lastName", "==", lastNameDelete.value);
-        userDelete.delete();
+        userDelete
+            .delete()
+            .then(() => {
+                console.log("User saved!");
+            })
+            .catch(error => {
+                console.log("Error: ", error);
+            });
     });
 });
