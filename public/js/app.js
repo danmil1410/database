@@ -47,19 +47,14 @@ addUser.addEventListener("click", () => {
 showUsers.addEventListener("click", () => {
     docRef
         .onSnapshot(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                if (doc && doc.exists) {
-                    const userData = doc.data();
-                    const text = document.createElement("p");
-                    result.appendChild(text);
-                    text.textContent =
-                        JSON.stringify(userData.firstName).replace(
-                            /["']/g,
-                            ""
-                        ) +
-                        " " +
-                        JSON.stringify(userData.lastName).replace(/["']/g, "");
-                }
+            snapshot.docChanges.forEach(change => {
+                const userData = doc.data();
+                const text = document.createElement("p");
+                result.appendChild(text);
+                text.textContent =
+                    JSON.stringify(userData.firstName).replace(/["']/g, "") +
+                    " " +
+                    JSON.stringify(userData.lastName).replace(/["']/g, "");
             });
         })
         .catch(error => {
