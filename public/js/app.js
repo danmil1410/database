@@ -36,6 +36,7 @@ addUser.addEventListener("click", () => {
 showUsers.addEventListener("click", () => {
     docRef
         .get()
+        .orderBy("firstName")
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 if (doc && doc.exists) {
