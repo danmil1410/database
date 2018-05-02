@@ -46,7 +46,7 @@ addUser.addEventListener("click", () => {
 
 showUsers.addEventListener("click", () => {
     docRef
-        .onSnapshot(querySnapshot => {
+        .onSnapshot(snapshot => {
             snapshot.docChanges.forEach(change => {
                 const userData = doc.data();
                 const text = document.createElement("p");
