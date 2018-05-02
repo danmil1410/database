@@ -21,19 +21,27 @@ const showUsers = document.querySelector("#showUsers");
 const result = document.querySelector("#result");
 
 addUser.addEventListener("click", () => {
-    docRef
-        .add({
-            firstName: firstName.value,
-            lastName: lastName.value
-        })
-        .then(() => {
-            console.log("Data saved!");
-        })
-        .catch(error => {
-            console.log("Error: ", error);
-        });
-    firstName.value = "";
-    lastName.value = "";
+    try {
+        if (firstName.value && lastName.value) {
+            docRef
+                .add({
+                    firstName: firstName.value,
+                    lastName: lastName.value
+                })
+                .then(() => {
+                    console.log("Data saved!");
+                })
+                .catch(error => {
+                    console.log("Error: ", error);
+                });
+            firstName.value = "";
+            lastName.value = "";
+        } else {
+            throw new SyntaxError("Incomplete data: type the full name!");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
 });
 
 showUsers.addEventListener("click", () => {
