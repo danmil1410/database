@@ -66,9 +66,11 @@ showUsers.addEventListener("click", () => {
 
 buttonRemove.addEventListener("click", () => {
     docRef.onSnapshot(querySnapshot => {
-        const userDelete = docRef
-            .where("firstName", "==", firstNameDelete.value)
-            .where("lastName", "==", lastNameDelete.value);
+        const userDelete = docRef.where(
+            "firstName",
+            "==",
+            firstNameDelete.value
+        );
         userDelete
             .delete()
             .then(() => {
