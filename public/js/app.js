@@ -48,46 +48,27 @@ addUser.addEventListener("click", () => {
 });
 
 showUsers.addEventListener("click", () => {
-    try {
-        if (doc && doc.exists) {
-            docRef.onSnapshot(querySnapshot => {
-                while (result.firstChild) {
-                    result.removeChild(result.firstChild);
-                }
-                querySnapshot.forEach(doc => {
-                    const userData = doc.data();
-                    const text = document.createElement("p");
-                    result.appendChild(text);
-                    text.textContent =
-                        JSON.stringify(userData.firstName).replace(
-                            /["']/g,
-                            ""
-                        ) +
-                        " " +
-                        JSON.stringify(userData.lastName).replace(/["']/g, "");
-                });
-            });
-        } else {
-            throw new TypeError("There are no users to delete!");
+    docRef.onSnapshot(querySnapshot => {
+        while (result.firstChild) {
+            result.removeChild(result.firstChild);
         }
-    } catch (e) {
-        alert(e.message);
-    }
+        querySnapshot.forEach(doc => {
+            const userData = doc.data();
+            const text = document.createElement("p");
+            result.appendChild(text);
+            text.textContent =
+                JSON.stringify(userData.firstName).replace(/["']/g, "") +
+                " " +
+                JSON.stringify(userData.lastName).replace(/["']/g, "");
+        });
+    });
 });
 
 buttonRemove.addEventListener("click", () => {
-    try {
-        if (doc && doc.exists) {
-            docRef.onSnapshot(querySnapshot => {
-                const userDelete = docRef
-                    .where("firstName", "==", firstNameDelete.value)
-                    .where("lastName", "==", lastNameDelete.value);
-                userDelete.delete();
-            });
-        } else {
-            throw new TypeError("There are no users to delete!");
-        }
-    } catch (e) {
-        alert(e.message);
-    }
+    docRef.onSnapshot(querySnapshot => {
+        const userDelete = docRef
+            .where("firstName", "==", firstNameDelete.value)
+            .where("lastName", "==", lastNameDelete.value);
+        userDelete.delete();
+    });
 });
