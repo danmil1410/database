@@ -87,9 +87,9 @@ const removeUserModule = (function() {
         .where("firstName", "==", _deleteFirstName.value)
         .where("lastName", "==", _deleteLastName.value);
 
-    try {
-        if (_deleteFirstName.value && _deleteLastName.value) {
-            _removeButton.addEventListener("click", () => {
+    _removeButton.addEventListener("click", () => {
+        try {
+            if (_deleteFirstName.value && _deleteLastName.value) {
                 firestoreModule.docRef.onSnapshot(querySnapshot => {
                     _selectedUser
                         .get()
@@ -102,13 +102,13 @@ const removeUserModule = (function() {
                             console.log("Error: ", error);
                         });
                 });
-            });
-            _deleteFirstName.value = "";
-            _deleteLastName.value = "";
-        } else {
-            throw new SyntaxError("Incomplete data: type the full name!");
+                _deleteFirstName.value = "";
+                _deleteLastName.value = "";
+            } else {
+                throw new SyntaxError("Incomplete data: type the full name!");
+            }
+        } catch (e) {
+            alert(e.message);
         }
-    } catch (e) {
-        alert(e.message);
-    }
+    });
 })();
