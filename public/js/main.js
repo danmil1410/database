@@ -15,9 +15,6 @@ firebase.initializeApp(appConfig);
 //Main module
 const firestoreModule = (function() {
     const _firestore = firebase.firestore();
-    const _settings = { timestampsInSnapshots: true, origin: true };
-
-    _firestore.settings(_settings);
 
     return {
         docRef: _firestore.collection("database")
