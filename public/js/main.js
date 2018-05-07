@@ -87,18 +87,11 @@ const removeUserModule = (function() {
     _removeButton.addEventListener("click", () => {
         try {
             if (_deleteFirstName.value && _deleteLastName.value) {
-                firestoreModule.docRef.onSnapshot(querySnapshot => {
-                    _selectedUser
-                        .get()
-                        .then(querySnapshot => {
-                            querySnapshot.forEach(doc => {
-                                doc.ref.delete();
-                            });
-                        })
-                        .catch(error => {
-                            console.log("Error: ", error);
-                        });
+                _selectedUser.onSnapshot(doc => {
+                    doc.data().delete();
                 });
+                _deleteFirstName.value = "";
+                _deleteLastName.value = "";
             } else {
                 throw new SyntaxError("Incomplete data: type the full name!");
             }
