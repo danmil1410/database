@@ -88,27 +88,19 @@ const removeUserModule = (function() {
         .where("lastName", "==", _deleteLastName.value);
 
     _removeButton.addEventListener("click", () => {
-        try {
-            if (_deleteFirstName.value && _deleteLastName.value) {
-                firestoreModule.docRef.onSnapshot(querySnapshot => {
-                    _selectedUser
-                        .get()
-                        .then(querySnapshot => {
-                            querySnapshot.forEach(doc => {
-                                doc.ref.delete();
-                            });
-                        })
-                        .catch(error => {
-                            console.log("Error: ", error);
-                        });
+        firestoreModule.docRef.onSnapshot(querySnapshot => {
+            _selectedUser
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        doc.ref.delete();
+                    });
+                })
+                .catch(error => {
+                    console.log("Error: ", error);
                 });
-                _deleteFirstName.value = "";
-                _deleteLastName.value = "";
-            } else {
-                throw new SyntaxError("Incomplete data: type the full name!");
-            }
-        } catch (e) {
-            alert(e.message);
-        }
+        });
+        _deleteFirstName.value = "";
+        _deleteLastName.value = "";
     });
 })();
