@@ -87,8 +87,17 @@ const removeUserModule = (function() {
     _removeButton.addEventListener("click", () => {
         try {
             if (_deleteFirstName.value && _deleteLastName.value) {
-                _selectedUser.onSnapshot(doc => {
-                    doc.data().delete();
+                _selectedUser.get().then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        doc.ref
+                            .delete()
+                            .then(() => {
+                                console.log("User deleted!");
+                            })
+                            .catch(error => {
+                                console.log("Error: ", error);
+                            });
+                    });
                 });
                 _deleteFirstName.value = "";
                 _deleteLastName.value = "";
