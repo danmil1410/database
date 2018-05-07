@@ -98,9 +98,9 @@ const removeUserModule = (function() {
                         .catch(error => {
                             console.log("Error: ", error);
                         });
+                    _deleteFirstName.value = "";
+                    _deleteLastName.value = "";
                 });
-                _deleteFirstName.value = "";
-                _deleteLastName.value = "";
             } else {
                 throw new SyntaxError("Incomplete data: type the full name!");
             }
