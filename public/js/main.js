@@ -87,18 +87,28 @@ const removeUserModule = (function() {
         .where("firstName", "==", _deleteFirstName.value)
         .where("lastName", "==", _deleteLastName.value);
 
-    _removeButton.addEventListener("click", () => {
-        firestoreModule.docRef.onSnapshot(querySnapshot => {
-            _selectedUser
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(doc => {
-                        doc.ref.delete();
-                    });
-                })
-                .catch(error => {
-                    console.log("Error: ", error);
+    try {
+        if (_deleteFirstName.value && _deleteLastName.value) {
+            _removeButton.addEventListener("click", () => {
+                firestoreModule.docRef.onSnapshot(querySnapshot => {
+                    _selectedUser
+                        .get()
+                        .then(querySnapshot => {
+                            querySnapshot.forEach(doc => {
+                                doc.ref.delete();
+                            });
+                        })
+                        .catch(error => {
+                            console.log("Error: ", error);
+                        });
                 });
-        });
-    });
+            });
+            _deleteFirstName.value = "";
+            _deleteLastName.value = "";
+        } else {
+            throw new SyntaxError("Incomplete data: type the full name!");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
 })();
