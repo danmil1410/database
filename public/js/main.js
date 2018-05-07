@@ -15,6 +15,9 @@ firebase.initializeApp(appConfig);
 //Main module
 const firestoreModule = (function() {
     const _firestore = firebase.firestore();
+    const _settings = { timestampsInSnapshots: true };
+
+    _firestore.settings(_settings);
 
     return {
         docRef: _firestore.collection("database")
@@ -85,18 +88,27 @@ const removeUserModule = (function() {
         .where("lastName", "==", _deleteLastName.value);
 
     _removeButton.addEventListener("click", () => {
-        firestoreModule.docRef.onSnapshot(querySnapshot => {
-            _selectedUser
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(doc => {
-                        doc.ref.delete();
-                    });
-                    console.log("Data deleted!");
-                })
-                .catch(error => {
-                    console.log("Error: ", error);
+        try {
+            if (_deleteFirstName.value && _deleteLastName.value) {
+                firestoreModule.docRef.onSnapshot(querySnapshot => {
+                    _selectedUser
+                        .get()
+                        .then(querySnapshot => {
+                            querySnapshot.forEach(doc => {
+                                doc.ref.delete();
+                            });
+                        })
+                        .catch(error => {
+                            console.log("Error: ", error);
+                        });
                 });
-        });
+                _deleteFirstName.value = "";
+                _deleteLastName.value = "";
+            } else {
+                throw new SyntaxError("Incomplete data: type the full name!");
+            }
+        } catch (e) {
+            alert(e.message);
+        }
     });
 })();
