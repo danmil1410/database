@@ -1,18 +1,19 @@
 "use strict";
 
+const config = {
+    apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
+    authDomain: "database-66f5c.firebaseapp.com",
+    databaseURL: "https://database-66f5c.firebaseio.com",
+    projectId: "database-66f5c",
+    storageBucket: "database-66f5c.appspot.com",
+    messagingSenderId: "891831635853"
+};
+
+firebase.initializeApp(config);
+
 //Main module - app config
 const appConfigModule = (function() {
-    const config = {
-        apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
-        authDomain: "database-66f5c.firebaseapp.com",
-        databaseURL: "https://database-66f5c.firebaseio.com",
-        projectId: "database-66f5c",
-        storageBucket: "database-66f5c.appspot.com",
-        messagingSenderId: "891831635853"
-    };
     const _firestore = firebase.firestore();
-
-    firebase.initializeApp(config);
 
     return {
         docRef: _firestore.collection("database")
