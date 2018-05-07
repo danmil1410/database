@@ -1,7 +1,7 @@
 "use strict";
 
 //App configuration
-const config = {
+const appConfig = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
     databaseURL: "https://database-66f5c.firebaseio.com",
@@ -10,12 +10,13 @@ const config = {
     messagingSenderId: "891831635853"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(appConfig);
 
-//Main module - app config
+//Main module
 const firestoreModule = (function() {
     const _firestore = firebase.firestore();
     const _settings = { timestampsInSnapshots: true };
+
     _firestore.settings(_settings);
 
     return {
@@ -23,11 +24,19 @@ const firestoreModule = (function() {
     };
 })();
 
+//Module - user data
+const userDataModule = (function() {
+    return {
+        firstName: document.querySelector("#firstName"),
+        lastName: document.querySelector("#lastName")
+    };
+})();
+
 //Module - add a new user
 const addUserModule = (function() {
     const _addButton = document.querySelector("#addUser");
-    const _firstName = document.querySelector("#firstName");
-    const _lastName = document.querySelector("#lastName");
+    const _firstName = userDataModule.firstName;
+    const _lastName = userDataModule.lastName;
 
     _addButton.addEventListener("click", () => {
         try {
@@ -82,14 +91,20 @@ const removeUserModule = (function() {
     const _removeButton = document.querySelector("#buttonRemove");
     const _deleteFirstName = document.querySelector("#firstNameDelete");
     const _deleteLastName = document.querySelector("#lastNameDelete");
+    const _firstName = userDataModule.firstName;
+    const _lastName = userDataModule.lastName;
+    const _selectedUser = firestoreModule.docRef
+        .where("firstName", "==", _firstName.value)
+        .where("lastName", "==", _lastName.value);
 
     _removeButton.addEventListener("click", () => {
         firestoreModule.docRef.onSnapshot(querySnapshot => {
-            firestoreModule.docRef
-                .doc("rPese5BGn1jk2ih7zVnn")
-                .delete()
-                .then(() => {
-                    console.log("User saved!");
+            _selectedUser
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        doc.ref.delete();
+                    });
                 })
                 .catch(error => {
                     console.log("Error: ", error);
