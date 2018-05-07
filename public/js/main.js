@@ -1,5 +1,6 @@
 "use strict";
 
+//App configuration
 const config = {
     apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
     authDomain: "database-66f5c.firebaseapp.com",
@@ -12,8 +13,10 @@ const config = {
 firebase.initializeApp(config);
 
 //Main module - app config
-const appConfigModule = (function() {
+const firestoreModule = (function() {
     const _firestore = firebase.firestore();
+    const _settings = { timestampsInSnapshots: true };
+    firestore.settings(_settings);
 
     return {
         docRef: _firestore.collection("database")
@@ -29,7 +32,7 @@ const addUserModule = (function() {
     _addButton.addEventListener("click", () => {
         try {
             if (_firstName.value && _lastName.value) {
-                appConfigModule.docRef
+                firestoreModule.docRef
                     .add({
                         firstName: _firstName.value,
                         lastName: _lastName.value
@@ -57,7 +60,7 @@ const showUsersModule = (function() {
     const _resultContainer = document.querySelector("#result");
 
     _showButton.addEventListener("click", () => {
-        appConfigModule.docRef.onSnapshot(querySnapshot => {
+        firestoreModule.docRef.onSnapshot(querySnapshot => {
             while (_resultContainer.firstChild) {
                 _resultContainer.removeChild(_resultContainer.firstChild);
             }
@@ -81,8 +84,8 @@ const removeUserModule = (function() {
     const _deleteLastName = document.querySelector("#lastNameDelete");
 
     _removeButton.addEventListener("click", () => {
-        appConfigModule.docRef.onSnapshot(querySnapshot => {
-            appConfigModule.docRef
+        firestoreModule.docRef.onSnapshot(querySnapshot => {
+            firestoreModule.docRef
                 .doc("rPese5BGn1jk2ih7zVnn")
                 .delete()
                 .then(() => {
