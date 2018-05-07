@@ -2,7 +2,7 @@
 
 //Main module - app config
 const appConfigModule = (function() {
-    const _config = {
+    const config = {
         apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
         authDomain: "database-66f5c.firebaseapp.com",
         databaseURL: "https://database-66f5c.firebaseio.com",
@@ -12,7 +12,7 @@ const appConfigModule = (function() {
     };
     const _firestore = firebase.firestore();
 
-    firebase.initializeApp(_config);
+    firebase.initializeApp(config);
 
     return {
         docRef: _firestore.collection("database")
