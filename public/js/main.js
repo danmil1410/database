@@ -100,7 +100,5 @@ const removeUserModule = (function() {
                     console.log("Error: ", error);
                 });
         });
-        _deleteFirstName.value = "";
-        _deleteLastName.value = "";
     });
 })();
