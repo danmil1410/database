@@ -24,19 +24,11 @@ const firestoreModule = (function() {
     };
 })();
 
-//Module - user data
-const userDataModule = (function() {
-    return {
-        firstName: document.querySelector("#firstName"),
-        lastName: document.querySelector("#lastName")
-    };
-})();
-
 //Module - add a new user
 const addUserModule = (function() {
     const _addButton = document.querySelector("#addUser");
-    const _firstName = userDataModule.firstName;
-    const _lastName = userDataModule.lastName;
+    const _firstName = document.querySelector("#firstName");
+    const _lastName = document.querySelector("#lastName");
 
     _addButton.addEventListener("click", () => {
         try {
@@ -91,11 +83,9 @@ const removeUserModule = (function() {
     const _removeButton = document.querySelector("#buttonRemove");
     const _deleteFirstName = document.querySelector("#firstNameDelete");
     const _deleteLastName = document.querySelector("#lastNameDelete");
-    const _firstName = userDataModule.firstName;
-    const _lastName = userDataModule.lastName;
     const _selectedUser = firestoreModule.docRef
-        .where("firstName", "==", _firstName.value)
-        .where("lastName", "==", _lastName.value);
+        .where("firstName", "==", _deleteFirstName.value)
+        .where("lastName", "==", _deleteLastName.value);
 
     _removeButton.addEventListener("click", () => {
         firestoreModule.docRef.onSnapshot(querySnapshot => {
