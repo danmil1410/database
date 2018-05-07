@@ -15,9 +15,6 @@ firebase.initializeApp(appConfig);
 //Main module
 const firestoreModule = (function() {
     const _firestore = firebase.firestore();
-    const _settings = { timestampsInSnapshots: true };
-
-    _firestore.settings(_settings);
 
     return {
         docRef: _firestore.collection("database")
@@ -95,6 +92,7 @@ const removeUserModule = (function() {
                     querySnapshot.forEach(doc => {
                         doc.ref.delete();
                     });
+                    console.log("Data deleted!");
                 })
                 .catch(error => {
                     console.log("Error: ", error);
