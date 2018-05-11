@@ -12,8 +12,8 @@ const firestoreModule = (function() {
     };
     const _firestore = firebase.firestore();
 
-    let appInit = () => {
-        firebase.initializeApp(_appConfig);
+    let appInit = function() {
+        return firebase.initializeApp(_appConfig);
     };
 
     return {
