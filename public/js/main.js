@@ -1,7 +1,7 @@
 "use strict";
 
 //Firestore app initialization
-const firestoreInit = (function() {
+const firestoreInit = (() => {
     const _appConfig = {
         apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
         authDomain: "database-66f5c.firebaseapp.com",
@@ -19,7 +19,7 @@ const firestoreInit = (function() {
 firestoreInit.appInit;
 
 //Main module
-const firestoreModule = (function() {
+const firestoreModule = (() => {
     const _firestore = firebase.firestore();
 
     return {
@@ -28,7 +28,7 @@ const firestoreModule = (function() {
 })();
 
 //Module - add a new user
-const addUserModule = (function() {
+const addUserModule = (() => {
     const _addButton = document.querySelector("#addUser");
     const _firstName = document.querySelector("#firstName");
     const _lastName = document.querySelector("#lastName");
@@ -59,7 +59,7 @@ const addUserModule = (function() {
 })();
 
 //Module - show existing users
-const showUsersModule = (function() {
+const showUsersModule = (() => {
     const _showButton = document.querySelector("#showUsers");
     const _resultContainer = document.querySelector("#result");
 
@@ -82,7 +82,7 @@ const showUsersModule = (function() {
 })();
 
 //Module - remove an user
-const removeUserModule = (function() {
+const removeUserModule = (() => {
     const _removeButton = document.querySelector("#buttonRemove");
     const _deleteFirstName = document.querySelector("#firstNameDelete");
     const _deleteLastName = document.querySelector("#lastNameDelete");
