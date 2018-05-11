@@ -107,4 +107,4 @@ const removeUserModule = (function() {
 })();
 
 //Firestore app initialization
-firestoreModule.appInit();
+firestoreModule.appInit;
