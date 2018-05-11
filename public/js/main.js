@@ -1,22 +1,19 @@
 "use strict";
 
-//App configuration
-const appConfig = {
-    apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
-    authDomain: "database-66f5c.firebaseapp.com",
-    databaseURL: "https://database-66f5c.firebaseio.com",
-    projectId: "database-66f5c",
-    storageBucket: "database-66f5c.appspot.com",
-    messagingSenderId: "891831635853"
-};
-
-firebase.initializeApp(appConfig);
-
 //Main module
 const firestoreModule = (function() {
+    const _appConfig = {
+        apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
+        authDomain: "database-66f5c.firebaseapp.com",
+        databaseURL: "https://database-66f5c.firebaseio.com",
+        projectId: "database-66f5c",
+        storageBucket: "database-66f5c.appspot.com",
+        messagingSenderId: "891831635853"
+    };
     const _firestore = firebase.firestore();
 
     return {
+        appInit: firebase.initializeApp(_appConfig),
         docRef: _firestore.collection("database")
     };
 })();
@@ -87,17 +84,18 @@ const removeUserModule = (function() {
     _removeButton.addEventListener("click", () => {
         try {
             if (_deleteFirstName.value && _deleteLastName.value) {
-                _selectedUser.get().then(querySnapshot => {
-                    querySnapshot.forEach(doc => {
-                        doc.ref
-                            .delete()
-                            .then(() => {
-                                console.log("User deleted!");
-                            })
-                            .catch(error => {
-                                console.log("Error: ", error);
+                firestoreModule.docRef.onSnapshot(querySnapshot => {
+                    _selectedUser
+                        .get()
+                        .then(querySnapshot => {
+                            querySnapshot.forEach(doc => {
+                                doc.ref.delete();
                             });
-                    });
+                            console.log("Data deleted!");
+                        })
+                        .catch(error => {
+                            console.log("Error: ", error);
+                        });
                 });
             } else {
                 throw new SyntaxError("Incomplete data: type the full name!");
@@ -107,3 +105,6 @@ const removeUserModule = (function() {
         }
     });
 })();
+
+//Firestore app initialization
+firestoreModule.appInit();
