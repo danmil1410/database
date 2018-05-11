@@ -12,8 +12,12 @@ const firestoreModule = (function() {
     };
     const _firestore = firebase.firestore();
 
+    let appInit = () => {
+        firebase.initializeApp(_appConfig);
+    };
+
     return {
-        appInit: firebase.initializeApp(_appConfig),
+        appInit: appInit,
         docRef: _firestore.collection("database")
     };
 })();
@@ -107,4 +111,4 @@ const removeUserModule = (function() {
 })();
 
 //Firestore app initialization
-firestoreModule.appInit;
+firestoreModule.appInit();
