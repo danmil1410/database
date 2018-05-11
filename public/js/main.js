@@ -1,7 +1,7 @@
 "use strict";
 
-//Main module
-const firestoreModule = (function() {
+//Firestore app initialization
+const firestoreInit = (function() {
     const _appConfig = {
         apiKey: "AIzaSyCWyU1e6WqN4dAFiQDuQG9pB69pSE1jPls",
         authDomain: "database-66f5c.firebaseapp.com",
@@ -10,14 +10,19 @@ const firestoreModule = (function() {
         storageBucket: "database-66f5c.appspot.com",
         messagingSenderId: "891831635853"
     };
-    const _firestore = firebase.firestore();
-
-    let appInit = function() {
-        return firebase.initializeApp(_appConfig);
-    };
 
     return {
-        appInit: appInit,
+        appInit: firebase.initializeApp(_appConfig)
+    };
+})();
+
+firestoreInit.appInit;
+
+//Main module
+const firestoreModule = (function() {
+    const _firestore = firebase.firestore();
+
+    return {
         docRef: _firestore.collection("database")
     };
 })();
@@ -109,6 +114,3 @@ const removeUserModule = (function() {
         }
     });
 })();
-
-//Firestore app initialization
-firestoreModule.appInit();
